@@ -66,26 +66,19 @@ func Choice[T any](sequence []T) T {
 
 // Return a k sized list of elements chosen from the population with replacement.
 func Choices[T any](population []T, k int) []T {
-	result := []T{}
+	result := make([]T, k)
 	for i := 0; i < k; i++ {
-		result = append(result, Choice(population))
+		result[i] = Choice(population)
 	}
 	return result
 }
 
 // Shuffle the sequence in place.
 func Shuffle[T any](sequence []T) []T {
-	length := len(sequence)
-	newSeq := make([]T, length)
-	result := make([]T, length)
-
-	copy(newSeq, sequence)
-	for i := 0; i < length; i++ {
-		j := RandInt(0, len(newSeq))
-		result[i] = newSeq[j]
-		newSeq[j] = newSeq[len(newSeq)-1]
-		newSeq = newSeq[:len(newSeq)-1]
-	}
-
+	result := make([]T, len(sequence))
+	copy(result, sequence)
+	rand.Shuffle(len(result), func(i, j int) {
+		result[i], result[j] = result[j], result[i]
+	})
 	return result
 }
