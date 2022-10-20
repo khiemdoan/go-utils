@@ -35,18 +35,18 @@ func TestRandInt2(t *testing.T) {
 func TestRandFloat32(t *testing.T) {
 	var start float32 = -100.0
 	var stop float32 = 100.0
-	n := RandFloat32(start, stop)
+	n := RandFloat(start, stop)
 	if n < start || n >= stop {
-		t.Error("RandFloat32 was incorrect")
+		t.Error("RandFloat was incorrect")
 	}
 }
 
 func TestRandFloat64(t *testing.T) {
-	start := -100.0
-	stop := 100.0
-	n := RandFloat64(start, stop)
+	var start float64 = -100.0
+	var stop float64 = 100.0
+	n := RandFloat(start, stop)
 	if n < start || n >= stop {
-		t.Error("RandFloat64 was incorrect")
+		t.Error("RandFloat was incorrect")
 	}
 }
 
