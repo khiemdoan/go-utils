@@ -3,6 +3,8 @@ package randomutil
 import (
 	"bytes"
 	"math/rand"
+
+	"golang.org/x/exp/constraints"
 )
 
 var (
@@ -31,21 +33,15 @@ func init() {
 }
 
 // Random an integer in range [start, stop)
-func RandInt(start, stop int) int {
-	delta := stop - start
-	return start + rand.Intn(delta)
+func RandInt[T constraints.Integer](start, stop T) T {
+	delta := int64(stop - start)
+	return start + T(rand.Int63n(delta))
 }
 
 // Random a float in range [start, stop)
-func RandFloat32(start, stop float32) float32 {
+func RandFloat[T constraints.Float](start, stop T) T {
 	delta := stop - start
-	return start + delta*rand.Float32()
-}
-
-// Random a float in range [start, stop)
-func RandFloat64(start, stop float64) float64 {
-	delta := stop - start
-	return start + delta*rand.Float64()
+	return start + delta*T(rand.Float64())
 }
 
 // Generate a random string with length n from set of vocaburary
