@@ -17,36 +17,36 @@ func contains[T comparable](sequence []T, item T) bool {
 func TestRandInt(t *testing.T) {
 	start := -100
 	stop := 100
-	n := RandInt(start, stop)
+	n := Rand(start, stop)
 	if n < start || n >= stop {
-		t.Error("RandInt was incorrect")
+		t.Error("Rand was incorrect")
 	}
 }
 
 func TestRandInt2(t *testing.T) {
 	start := 0
 	stop := 1
-	n := RandInt(start, stop)
+	n := Rand(start, stop)
 	if n != 0 {
-		t.Error("RandInt was incorrect")
+		t.Error("Rand was incorrect")
 	}
 }
 
 func TestRandFloat32(t *testing.T) {
 	var start float32 = -100.0
 	var stop float32 = 100.0
-	n := RandFloat(start, stop)
+	n := Rand(start, stop)
 	if n < start || n >= stop {
-		t.Error("RandFloat was incorrect")
+		t.Error("Rand was incorrect")
 	}
 }
 
 func TestRandFloat64(t *testing.T) {
 	var start float64 = -100.0
 	var stop float64 = 100.0
-	n := RandFloat(start, stop)
+	n := Rand(start, stop)
 	if n < start || n >= stop {
-		t.Error("RandFloat was incorrect")
+		t.Error("Rand was incorrect")
 	}
 }
 
