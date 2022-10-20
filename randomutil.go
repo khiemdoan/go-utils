@@ -3,6 +3,7 @@ package randomutil
 import (
 	"bytes"
 	"math/rand"
+	"time"
 
 	"golang.org/x/exp/constraints"
 )
@@ -15,6 +16,7 @@ var (
 	AsciiLettersAndDigits []rune
 	Punctuation           []rune
 	Printable             []rune
+	random                *rand.Rand
 )
 
 func init() {
@@ -30,18 +32,15 @@ func init() {
 	Printable = append(Printable, AsciiUppercase...)
 	Printable = append(Printable, Digits...)
 	Printable = append(Printable, Punctuation...)
+
+	seed := time.Now().UnixMilli()
+	random = rand.New(rand.NewSource(seed))
 }
 
-// Random an integer in range [start, stop)
-func RandInt[T constraints.Integer](start, stop T) T {
-	delta := int64(stop - start)
-	return start + T(rand.Int63n(delta))
-}
-
-// Random a float in range [start, stop)
-func RandFloat[T constraints.Float](start, stop T) T {
+// Random a number in range [start, stop)
+func Rand[T constraints.Integer | constraints.Float](start, stop T) T {
 	delta := stop - start
-	return start + delta*T(rand.Float64())
+	return start + delta*T(random.Float64())
 }
 
 // Generate a random string with length n from set of vocaburary
@@ -50,14 +49,14 @@ func String(n int, vocab []rune) string {
 	bb.Grow(n)
 	l := len(vocab)
 	for i := 0; i < n; i++ {
-		bb.WriteRune(vocab[RandInt(0, l)])
+		bb.WriteRune(vocab[Rand(0, l)])
 	}
 	return bb.String()
 }
 
 // Return a random element from the non-empty sequence
 func Choice[T any](sequence []T) T {
-	return sequence[RandInt(0, len(sequence))]
+	return sequence[Rand(0, len(sequence))]
 }
 
 // Return a k sized list of elements chosen from the population with replacement.
