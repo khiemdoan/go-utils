@@ -72,7 +72,7 @@ func Choices[T any](population []T, k int) []T {
 func Shuffle[T any](sequence []T) []T {
 	result := make([]T, len(sequence))
 	copy(result, sequence)
-	rand.Shuffle(len(result), func(i, j int) {
+	random.Shuffle(len(result), func(i, j int) {
 		result[i], result[j] = result[j], result[i]
 	})
 	return result
