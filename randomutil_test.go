@@ -18,6 +18,7 @@ func TestRandInt(t *testing.T) {
 	start := -100
 	stop := 100
 	n := Rand(start, stop)
+	fmt.Println(n)
 	if n < start || n >= stop {
 		t.Error("Rand was incorrect")
 	}
@@ -27,6 +28,7 @@ func TestRandInt2(t *testing.T) {
 	start := 0
 	stop := 1
 	n := Rand(start, stop)
+	fmt.Println(n)
 	if n != 0 {
 		t.Error("Rand was incorrect")
 	}
@@ -36,6 +38,7 @@ func TestRandFloat32(t *testing.T) {
 	var start float32 = -100.0
 	var stop float32 = 100.0
 	n := Rand(start, stop)
+	fmt.Println(n)
 	if n < start || n >= stop {
 		t.Error("Rand was incorrect")
 	}
@@ -45,6 +48,7 @@ func TestRandFloat64(t *testing.T) {
 	var start float64 = -100.0
 	var stop float64 = 100.0
 	n := Rand(start, stop)
+	fmt.Println(n)
 	if n < start || n >= stop {
 		t.Error("Rand was incorrect")
 	}
@@ -53,6 +57,7 @@ func TestRandFloat64(t *testing.T) {
 func TestString(t *testing.T) {
 	length := 10
 	str := String(length, AsciiLetters)
+	fmt.Println(str)
 	if len(str) != length {
 		t.Error("String was incorrect length")
 	}
@@ -66,6 +71,7 @@ func TestString(t *testing.T) {
 func TestChoice(t *testing.T) {
 	seq := []int{1, 2, 3, 4, 5, 6, 7, 8, 9, 10}
 	n := Choice(seq)
+	fmt.Println(n)
 	if !contains(seq, n) {
 		t.Error("Choice was incorrect")
 	}
