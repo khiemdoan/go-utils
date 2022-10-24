@@ -40,7 +40,7 @@ func init() {
 // Random a number in range [start, stop)
 func Rand[T constraints.Integer | constraints.Float](start, stop T) T {
 	delta := stop - start
-	return start + delta*T(random.Float64())
+	return start + T(float64(delta)*(random.Float64()))
 }
 
 // Generate a random string with length n from set of vocaburary
