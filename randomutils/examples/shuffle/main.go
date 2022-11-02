@@ -3,7 +3,7 @@ package main
 import (
 	"fmt"
 
-	"github.com/khiemdoan/randomutil"
+	"github.com/khiemdoan/go-utils/randomutil"
 )
 
 func main() {
