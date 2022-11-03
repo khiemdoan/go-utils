@@ -21,4 +21,8 @@ func TestNewObject(t *testing.T) {
 	if reflect.TypeOf(y) != reflect.TypeOf(x) {
 		t.Error("NewObject was incorrect")
 	}
+
+	if _, ok := y.(abc); !ok {
+		t.Error("NewObject was incorrect")
+	}
 }
