@@ -3,16 +3,9 @@ package randomutil
 import (
 	"fmt"
 	"testing"
-)
 
-func contains[T comparable](sequence []T, item T) bool {
-	for _, s := range sequence {
-		if s == item {
-			return true
-		}
-	}
-	return false
-}
+	"golang.org/x/exp/slices"
+)
 
 func TestRandInt(t *testing.T) {
 	start := -100
@@ -62,7 +55,7 @@ func TestString(t *testing.T) {
 		t.Error("String was incorrect length")
 	}
 	for _, c := range str {
-		if !contains(AsciiLetters, c) {
+		if !slices.Contains(AsciiLetters, c) {
 			t.Error("String was incorrect characters")
 		}
 	}
@@ -72,7 +65,7 @@ func TestChoice(t *testing.T) {
 	seq := []int{1, 2, 3, 4, 5, 6, 7, 8, 9, 10}
 	n := Choice(seq)
 	fmt.Println(n)
-	if !contains(seq, n) {
+	if !slices.Contains(seq, n) {
 		t.Error("Choice was incorrect")
 	}
 }
@@ -85,7 +78,7 @@ func TestChoices(t *testing.T) {
 		t.Error("Choices was incorrect")
 	}
 	for _, c := range choices {
-		if !contains(seq, c) {
+		if !slices.Contains(seq, c) {
 			t.Error("Choices was incorrect")
 		}
 	}
@@ -98,7 +91,7 @@ func TestShuffle(t *testing.T) {
 		t.Error("Shuffle was incorrect")
 	}
 	for _, c := range shuffled {
-		if !contains(seq, c) {
+		if !slices.Contains(seq, c) {
 			fmt.Println(c)
 			t.Error("Shuffle was incorrect")
 		}
