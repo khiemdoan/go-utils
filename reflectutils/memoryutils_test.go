@@ -1,4 +1,4 @@
-package memoryutils
+package reflectutils
 
 import (
 	"reflect"
