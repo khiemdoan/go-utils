@@ -2,8 +2,7 @@ package randomutil
 
 import (
 	"bytes"
-	"math/rand"
-	"time"
+	"math/rand/v2"
 
 	"golang.org/x/exp/constraints"
 )
@@ -16,7 +15,6 @@ var (
 	AsciiLettersAndDigits []rune
 	Punctuation           []rune
 	Printable             []rune
-	random                *rand.Rand
 )
 
 func init() {
@@ -32,15 +30,12 @@ func init() {
 	Printable = append(Printable, AsciiUppercase...)
 	Printable = append(Printable, Digits...)
 	Printable = append(Printable, Punctuation...)
-
-	seed := time.Now().UnixMilli()
-	random = rand.New(rand.NewSource(seed))
 }
 
 // Random a number in range [start, stop)
 func Rand[T constraints.Integer | constraints.Float](start, stop T) T {
 	delta := stop - start
-	return start + T(float64(delta)*(random.Float64()))
+	return start + T(float64(delta)*(rand.Float64()))
 }
 
 // Generate a random string with length n from set of vocaburary
@@ -72,7 +67,7 @@ func Choices[T any](population []T, k int) []T {
 func Shuffle[T any](sequence []T) []T {
 	result := make([]T, len(sequence))
 	copy(result, sequence)
-	random.Shuffle(len(result), func(i, j int) {
+	rand.Shuffle(len(result), func(i, j int) {
 		result[i], result[j] = result[j], result[i]
 	})
 	return result
